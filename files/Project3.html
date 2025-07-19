@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java 图形编辑器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #1E1E2E; /* 暗蓝色背景 */
+            color: #E1E1E1; /* 浅灰色字体 */
+        }
+        header {
+            background-color: #007ACC; /* VSCode蓝色 */
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .section {
+            background-color: #2D2D34; /* 深蓝卡片背景 */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .section h2 {
+            color: #00A1F1; /* VSCode蓝色 */
+            margin-top: 0;
+        }
+        ul {
+            list-style-type: disc; /* 设置圆点符号 */
+            padding-left: 10px;     /* 给ul添加一些左侧间距 */
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li {
+            list-style-position: inside; /* 确保圆点符号紧贴文本 */
+            padding-left: 30px; 
+            padding-right: 30px; 
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        hr {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, #3933ec, #270665); /* 渐变色 */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        img {
+            padding-top: 10px;
+            padding-left: 30px;
+        }
+        a {
+            color: #00A1F1;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #007ACC;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Java 图形编辑器 — 基于面向对象设计</h1>
+</header>
+
+<div class="container">
+    <section class="section">
+        <h2>项目简介</h2>
+        <p>独立设计并开的一款简易的图形编辑器，支持绘制矩形、圆形、线条、自由图形等多种形状，提供图形编辑、旋转、颜色调整、保存/加载等基本功能。整个项目基于面向对象设计思想，采用了抽象类、枚举、泛型等技术，架构清晰，灵活可扩展。</p>
+    </section>
+    <section class="section">
+        <h2>项目时间</h2>
+        <li>2025 年 06 月 03 日 - 2025 年 06 月 27 日</li>
+    </section>
+
+    <section class="section">
+        <h2>核心功能</h2>
+        <ul>
+            <li>图形操作：实现了对图形的绘制、选中、拖动、颜色设置、旋转和控制点缩放等操作。</li>
+            <li>图层管理：支持图层的管理与多图形的选中操作，提高编辑灵活性。</li>
+            <li>保存与加载：实现了图形数据的序列化保存与加载功能，支持项目的持久化存储。</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>技术亮点</h2>
+        <ul>
+            <li>面向对象设计：通过抽象类 ShapeBase 统一定义图形接口，并通过多态实现不同图形（如矩形、圆形、线条等）的操作。</li>
+            <li>泛型：在图层管理模块中应用泛型，提升了代码的复用性与类型安全性。</li>
+            <li>枚举类型：用于定义图形类型（如 RECTANGLE、ELLIPSE 等），简化了工厂方法的设计。</li>
+            <li>设计模式：采用静态工厂模式统一创建图形对象，使用单例模式集中管理应用状态（如当前画笔样式、当前图层等）。</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>功能截图：</h2>
+        <ul>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的创建过程及其在选择状态下的呈现效果。
+            </li>
+            <img src="../images/3_1.png" alt="Description of the image" width="1020">
+            <hr>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的整体移动操作，同时支持笔画属性和图形填充的调整。
+            </li>
+            <img src="../images/3_2.png" alt="Description of the image" width="1020">
+            <hr>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的复制、删除功能。
+            </li>
+            <img src="../images/3_3.png" alt="Description of the image" width="1020">
+            <img src="../images/3_4.png" alt="Description of the image" width="1020">
+            <hr>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的旋转功能。
+            </li>
+            <img src="../images/3_5.png" alt="Description of the image" width="1020">
+            <hr>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的顶点拖拽，调整大小。
+            </li>
+            <img src="../images/3_6.png" alt="Description of the image" width="1020">
+            <hr>
+            <li>
+                该页面展示了矩形、圆形、直线、自由图形、多边形等图形的图层功能。
+            </li>
+            <img src="../images/3_7.png" alt="Description of the image" width="1020">
+            <img src="../images/3_8.png" alt="Description of the image" width="1020">
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>项目地址：</h2>
+        <ul>
+            <li><a href="https://github.com/AdventureDe/SZU/tree/main/面向对象高级编程/面向對象大作業" target="_blank">GitHub 源码</a></li>
+        </ul>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 林浩晟. All rights reserved.</p>
+</footer>
+</body>
+</html>
