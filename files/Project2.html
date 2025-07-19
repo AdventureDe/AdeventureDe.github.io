@@ -10,9 +10,17 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #1E1E2E; /* 暗蓝色背景 */
-            color: #E1E1E1; /* 浅灰色字体 */
+            background-color: #1E1E2E;
+            color: #E1E1E1;
+            font-size: 1rem; /* 基础字体大小 */
         }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.875rem; /* 小屏幕时字体变小 */
+            }
+        }
+
         header {
             background-color: #007ACC; /* VSCode蓝色 */
             color: #fff;
@@ -36,12 +44,13 @@
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
+        .section img {
+            max-width: 100%;
+            height: auto;
+        }
         .section h2 {
             color: #00A1F1; /* VSCode蓝色 */
             margin-top: 0;
-        }
-        .center-align {
-            text-align: center; /* 水平居中 */
         }
         ul {
             list-style-type: disc; /* 设置圆点符号 */
@@ -65,8 +74,10 @@
             margin-bottom: 20px;
         }
         img {
+            max-width: 100%;
+            height: auto;
             padding-top: 10px;
-            padding-left: 30px;
+            padding-left: 20px;
         }
         a {
             color: #00A1F1;
@@ -80,6 +91,38 @@
             padding: 10px 0;
             background-color: #007ACC;
             color: #fff;
+        }
+        /* 手机端样式 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            .container {
+                width: 95%;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .section {
+                padding: 15px;
+            }
+            ul {
+                padding-left: 5px;
+            }
+            img {
+                width: 100%; /* 图片全宽显示 */
+                padding-left: 0;
+            }
+        }
+
+        /* 更大的设备（平板及桌面） */
+        @media (min-width: 769px) {
+            .container {
+                width: 80%;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
