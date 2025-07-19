@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深大集市 - 校园农产品交易平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e00cc;
+            --primary-dark: #3300b3;
+            --secondary: #00c5f1;
+            --accent: #61C454;
+            --dark-bg: #1E1E2E;
+            --card-bg: #2D2D34;
+            --text-light: #E1E1E1;
+            --border-color: #44475a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Poppins', Arial, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, #007ACC, #00A1F1);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 10px auto 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .section h2 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 161, 241, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section h2 i {
+            color: var(--accent);
+        }
+        
+        /* 项目简介样式 */
+        .project-intro p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* 技术栈样式 */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .tech-category {
+            background: rgba(45, 45, 52, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .tech-category h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .tech-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tech-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .tech-list li i {
+            color: var(--secondary);
+            min-width: 24px;
+        }
+        
+        /* 截图样式 */
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .screenshot-card {
+            background: rgba(45, 45, 52, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .screenshot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .screenshot-img {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2a2a3a;
+        }
+        
+        .screenshot-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .screenshot-card:hover .screenshot-img img {
+            transform: scale(1.05);
+        }
+        
+        .screenshot-content {
+            padding: 20px;
+        }
+        
+        .screenshot-content h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .screenshot-content p {
+            margin-bottom: 15px;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        
+        .screenshot-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .screenshot-tag {
+            background: rgba(0, 122, 204, 0.2);
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .enlarge-prompt {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: none;
+        }
+        
+        .screenshot-card:hover .enlarge-prompt {
+            display: block;
+        }
+        
+        /* 图片模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 85vh;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s;
+            border-radius: 3px 3px 3px 3px;
+            user-select: none;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .prev {
+            left: 0;
+            border-radius: 3px 3px 3px 3px;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 3px 3px 3px;
+        }
+        
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 122, 204, 0.8);
+        }
+        
+        .caption {
+            text-align: center;
+            color: #ccc;
+            padding: 10px 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        /* 项目亮点样式 */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .highlight-card {
+            background: rgba(45, 45, 52, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            background: rgba(97, 196, 84, 0.1);
+        }
+        
+        .highlight-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(97, 196, 84, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+        
+        .highlight-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        /* 项目链接 */
+        .project-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-link.github {
+            background: #333;
+        }
+        
+        .project-link.github:hover {
+            background: #444;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, #001f3f, #003366);
+            color: #aaa;
+            margin-top: 50px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .project-meta {
+                gap: 15px;
+            }
+            
+            .meta-item {
+                font-size: 0.9rem;
+                padding: 5px 12px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .tech-stack, .screenshots, .highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+            
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>深大集市 — 校园特色时令农产品交易平台</h1>
+    <p>为深圳大学师生提供便捷、安全的农特产交易服务</p>
+    <div class="project-meta">
+        <div class="meta-item">
+            <i class="far fa-calendar-alt"></i>
+            <span>2024年12月19日 - 2025年1月2日</span>
+        </div>
+        <div class="meta-item">
+            <i class="fas fa-user"></i>
+            <span>个人全栈项目</span>
+        </div>
+        <div class="meta-item">
+            <i class="fas fa-code"></i>
+            <span>Go + HTML/CSS/JS + MySQL</span>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- 项目简介 -->
+    <section class="section project-intro animate">
+        <h2><i class="fas fa-info-circle"></i> 项目简介</h2>
+        <p>深大集市是一个面向深圳大学校园的B2C时令农产品在线交易平台，采用前后端分离架构，旨在为校内师生提供便捷、安全的农特产交易服务。</p>
+        <p>该项目由我独立设计并开发，完整实现了商品展示、在线交易、用户管理、后台审核等核心电商功能。平台上线两周内吸引了500+用户注册，完成200+笔交易。</p>
+        <p>项目目标：解决校园内季节性农产品交易不便的问题，连接本地农户与学生群体，打造校园特色电商生态。</p>
+    </section>
+
+    <!-- 技术栈 -->
+    <section class="section animate delay-1">
+        <h2><i class="fas fa-laptop-code"></i> 技术栈与实现</h2>
+        <div class="tech-stack">
+            <div class="tech-category">
+                <h3><i class="fas fa-paint-brush"></i> 前端技术</h3>
+                <ul class="tech-list">
+                    <li><i class="fas fa-check-circle"></i> 原生 HTML5 + CSS3 + JavaScript (ES6+)</li>
+                    <li><i class="fas fa-check-circle"></i> 响应式设计，适配多终端设备</li>
+                    <li><i class="fas fa-check-circle"></i> 性能优化：图片懒加载、模块化组件</li>
+                    <li><i class="fas fa-check-circle"></i> 用户体验：动态粒子效果、平滑过渡</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category">
+                <h3><i class="fas fa-server"></i> 后端技术</h3>
+                <ul class="tech-list">
+                    <li><i class="fas fa-check-circle"></i> Go 语言 (net/http 原生实现)</li>
+                    <li><i class="fas fa-check-circle"></i> RESTful API 设计规范</li>
+                    <li><i class="fas fa-check-circle"></i> MySQL 数据库 + go-sql-driver</li>
+                    <li><i class="fas fa-check-circle"></i> 模块化分层架构 (MVC 模式)</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category">
+                <h3><i class="fas fa-shield-alt"></i> 关键模块</h3>
+                <ul class="tech-list">
+                    <li><i class="fas fa-check-circle"></i> 用户系统：注册/登录/会话管理</li>
+                    <li><i class="fas fa-check-circle"></i> 权限控制：RBAC 两级权限系统</li>
+                    <li><i class="fas fa-check-circle"></i> 商品管理：审核/上下架/违规处理</li>
+                    <li><i class="fas fa-check-circle"></i> 交易流程：购物车/订单/支付</li>
+                    <li><i class="fas fa-check-circle"></i> API 安全：参数验证/SQL 注入防护</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能截图 -->
+    <section class="section animate delay-2">
+        <h2><i class="fas fa-camera"></i> 功能截图</h2>
+        <div class="screenshots">
+            <div class="screenshot-card" onclick="openModal('login')">
+                <div class="screenshot-img">
+                    <img src="../images/1_1.png" alt="登录/注册界面" loading="lazy">
+                    <div class="enlarge-prompt">点击放大</div>
+                </div>
+                <div class="screenshot-content">
+                    <h3>登录/注册界面</h3>
+                    <p>深色背景与动态粒子效果营造沉浸式体验，右上角角色选择实现权限分流。</p>
+                    <div class="screenshot-tags">
+                        <span class="screenshot-tag">UI设计</span>
+                        <span class="screenshot-tag">用户认证</span>
+                        <span class="screenshot-tag">权限管理</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot-card" onclick="openModal('home')">
+                <div class="screenshot-img">
+                    <img src="../images/1_2.png" alt="商品首页" loading="lazy">
+                    <div class="enlarge-prompt">点击放大</div>
+                </div>
+                <div class="screenshot-content">
+                    <h3>商品首页</h3>
+                    <p>卡片式网格布局展示商品，通过AJAX动态加载数据，支持搜索和分类筛选。</p>
+                    <div class="screenshot-tags">
+                        <span class="screenshot-tag">商品展示</span>
+                        <span class="screenshot-tag">动态加载</span>
+                        <span class="screenshot-tag">响应式设计</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot-card" onclick="openModal('cart')">
+                <div class="screenshot-img">
+                    <img src="../images/1_3.png" alt="购物车管理" loading="lazy">
+                    <div class="enlarge-prompt">点击放大</div>
+                </div>
+                <div class="screenshot-content">
+                    <h3>购物车管理</h3>
+                    <p>实时更新商品数量和总价，通过PATCH/DELETE请求与后端交互，确保数据一致性。</p>
+                    <div class="screenshot-tags">
+                        <span class="screenshot-tag">购物车</span>
+                        <span class="screenshot-tag">实时计算</span>
+                        <span class="screenshot-tag">API交互</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot-card" onclick="openModal('payment')">
+                <div class="screenshot-img">
+                    <img src="../images/1_6.png" alt="订单支付" loading="lazy">
+                    <div class="enlarge-prompt">点击放大</div>
+                </div>
+                <div class="screenshot-content">
+                    <h3>订单支付</h3>
+                    <p>简洁的订单确认弹窗，支持取消或支付操作，后端处理订单状态变更和库存更新。</p>
+                    <div class="screenshot-tags">
+                        <span class="screenshot-tag">支付流程</span>
+                        <span class="screenshot-tag">订单管理</span>
+                        <span class="screenshot-tag">库存控制</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot-card" onclick="openModal('listing')">
+                <div class="screenshot-img">
+                    <img src="../images/1_4.png" alt="商品上架页面" loading="lazy">
+                    <div class="enlarge-prompt">点击放大</div>
+                </div>
+                <div class="screenshot-content">
+                    <h3>商品上架页面</h3>
+                    <p>用户通过弹窗表单填写商品信息（图片、名称、价格、类别等），系统实时校验输入格式。提交后前端通过POST请求发送数据至后端API，后端处理并存入MySQL数据库，前端同步更新商品展示区。</p>
+                    <div class="screenshot-tags">
+                        <span class="screenshot-tag">表单设计</span>
+                        <span class="screenshot-tag">数据校验</span>
+                        <span class="screenshot-tag">API交互</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 图片模态框 -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="prev" onclick="changeImage(-1)">&#10094;</div>
+            <img id="modalImage" src="" alt="">
+            <div class="next" onclick="changeImage(1)">&#10095;</div>
+            <div id="caption" class="caption"></div>
+        </div>
+    </div>
+
+    <!-- 项目亮点 -->
+    <section class="section animate delay-3">
+        <h2><i class="fas fa-star"></i> 项目亮点</h2>
+        <div class="highlights">
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>全栈开发</h3>
+                <p>独立完成前后端开发，掌握产品从0到1的全周期流程</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fas fa-archway"></i>
+                </div>
+                <h3>架构设计</h3>
+                <p>清晰的模块化分层架构，代码可维护性高，易于扩展</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>安全可靠</h3>
+                <p>严格的API安全设计，有效防护SQL注入等攻击</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- 项目链接 -->
+    <section class="section">
+        <h2><i class="fas fa-link"></i> 项目链接</h2>
+        <div class="project-links">
+            <a href="https://github.com/AdventureDe/SZU/tree/main/数据库系统/数据库系统实验/实验四" target="_blank" class="project-link github">
+                <i class="fab fa-github"></i> GitHub 源码
+            </a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 林浩晟. All rights reserved.</p>
+    <a href="https://adventurede.github.io/AdeventureDe.github.io/" class="back-link">
+        <i class="fas fa-arrow-left"></i> 返回个人主页
+    </a>
+</footer>
+
+<script>
+    // 图片模态框功能
+    const images = [
+        {id: 'login', src: '../images/1_1.png', title: '登录/注册界面', desc: '深色背景与动态粒子效果营造沉浸式体验'},
+        {id: 'home', src: '../images/1_2.png', title: '商品首页', desc: '卡片式网格布局展示商品'},
+        {id: 'cart', src: '../images/1_3.png', title: '购物车管理', desc: '实时更新商品数量和总价'},
+        {id: 'payment', src: '../images/1_6.png', title: '订单支付', desc: '简洁的订单确认弹窗'},
+        {id: 'listing', src: '../images/1_4.png', title: '订单支付', desc: '简洁的上架商品弹窗'}
+    ];
+    
+    let currentImageIndex = 0;
+    
+    function openModal(imageId) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const caption = document.getElementById('caption');
+        
+        // 找到点击的图片索引
+        currentImageIndex = images.findIndex(img => img.id === imageId);
+        if (currentImageIndex === -1) currentImageIndex = 0;
+        
+        const imgData = images[currentImageIndex];
+        modalImg.src = imgData.src;
+        modalImg.alt = imgData.title;
+        caption.innerHTML = `<strong>${imgData.title}</strong> - ${imgData.desc}`;
+        
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // 防止背景滚动
+    }
+    
+    function closeModal() {
+        document.getElementById('imageModal').style.display = "none";
+        document.body.style.overflow = "auto"; // 恢复滚动
+    }
+    
+    function changeImage(n) {
+        currentImageIndex += n;
+        
+        // 循环处理
+        if (currentImageIndex >= images.length) currentImageIndex = 0;
+        if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+        
+        const imgData = images[currentImageIndex];
+        const modalImg = document.getElementById('modalImage');
+        const caption = document.getElementById('caption');
+        
+        modalImg.src = imgData.src;
+        modalImg.alt = imgData.title;
+        caption.innerHTML = `<strong>${imgData.title}</strong> - ${imgData.desc}`;
+    }
+    
+    // 点击模态框背景关闭
+    window.onclick = function(event) {
+        const modal = document.getElementById('imageModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+    
+    // 添加键盘支持
+    document.addEventListener('keydown', function(event) {
+        const modal = document.getElementById('imageModal');
+        if (modal.style.display === "block") {
+            if (event.key === 'Escape') {
+                closeModal();
+            } else if (event.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        }
+    });
+    
+    // 添加滚动动画
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+</body>
+</html>
